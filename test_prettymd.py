@@ -1,3 +1,7 @@
+"""
+Unit tests and integration tests for prettymd.PrettyMD class.
+"""
+
 from unittest import TestCase
 from .prettymd import PrettyMD
 

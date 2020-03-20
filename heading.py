@@ -1,6 +1,8 @@
 """
 Defines a Tree class that will represent the headings and sub-headings, which will inherently by a node's height,
 indicate the indentation level that the heading needs to have.
+
+# TODO: Modify as required to implement prettymd.PrettyMD functionality.
 """
 
 import re
@@ -15,28 +17,20 @@ class Heading:
 
     NODE_VALUE_TYPES = Optional[str]
 
-    def __init__(self, val: NODE_VALUE_TYPES, level: int, start: int, end: int,
-                 subheadings: Optional[List['Heading']] = None, height: Optional[int] = 0):
+    def __init__(self, val: NODE_VALUE_TYPES, level: int, subheadings: Optional[List['Heading']] = None):
         """
         A :class:`Heading` instance is essentially a 'node' in a Tree.
 
         :param val: Heading text
         :param level: Number of '#' chars before heading text
-        :param start: Starting location of Heading
-        :param end: End location of Heading
         :param subheadings: Nested Headings.
-        :param height: Nesting level/indentation level
         """
 
         self.val = val
         self.level = level
         self._children = subheadings if subheadings is not None else []
-        self.height = height if height is not None else 0
 
         self.anchor_name = self.generate_anchor_name()
-
-        self._start = start
-        self._end = end
 
         return
 
@@ -45,22 +39,6 @@ class Heading:
 
     def __str__(self):
         return "#" * self.level + "{}".format(self.val)
-
-    def __getitem__(self, item):
-        return self._children[item]
-
-    def add_subheading(self, subheading: 'Heading') -> None:
-        """
-        Append a node to :instance_parameter:`children` with incremented height.
-
-        :param subheading:
-        :return:
-        """
-
-        subheading.height = self.height + 1
-        self._children.append(subheading)
-
-        return
 
     def set_subheadings(self, subheadings: List['Heading']):
         """
@@ -104,23 +82,3 @@ class Heading:
         """
 
         return self._children
-
-    @property
-    def start(self) -> int:
-        """
-        String location - where the Heading starts.
-
-        :return:
-        """
-
-        return self._start
-
-    @property
-    def end(self) -> int:
-        """
-        String location - where the Heading ends.
-
-        :return:
-        """
-
-        return self._end
