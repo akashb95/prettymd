@@ -27,7 +27,7 @@ class PrettyMD:
         self._navlink = back_to_toc_link
 
         self.title = None
-        self.toc = ""
+        self._toc = ""
 
         # TODO
         return
@@ -92,7 +92,7 @@ class PrettyMD:
 
     @property
     def toc(self):
-        return self.toc
+        return self._toc
 
     @property
     def output(self):
