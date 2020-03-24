@@ -66,7 +66,7 @@ class Heading:
 
         if self.val is not None:
             replaced_whitespace = re.sub(r'\s+', "-", self.val.strip().lower())
-            return re.sub(r'[^a-zA-z0-9\-]', "", replaced_whitespace)
+            return re.sub(r'[^a-zA-Z0-9\-]', "", replaced_whitespace)
 
         return ""
 
